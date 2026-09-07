@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from 'react'
 import { ArrowLeft, ArrowRight, Heart, Menu, Search, ShoppingBag, UserRound, X } from 'lucide-react'
+import { SearchOverlay } from '@/components/search-overlay'
+import { useSearchStore } from '@/lib/search-store'
 
 const heroImage = 'https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1800&q=90'
 const images = {
@@ -42,13 +44,15 @@ function ProductCard({ product, dark = false }: { product: typeof products[numbe
 
 export default function Page() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const openSearch = useSearchStore((state) => state.open)
   const [filter, setFilter] = useState('همه')
   const [email, setEmail] = useState('')
   const [subscribed, setSubscribed] = useState(false)
   const filters = ['همه', 'جدید', 'پرفروش', 'حراج', 'پریمیوم']
   const filtered = useMemo(() => filter === 'همه' ? products : products.filter((p) => p.tag === filter), [filter])
   return <main dir="rtl">
-    <header className="site-header"><button className="mobile-menu" onClick={() => setMenuOpen(true)} aria-label="باز کردن منو"><Menu size={20} /></button><div className="logo">DBY</div><nav><a href="#categories">دسته‌بندی‌ها</a><a href="#new">تازه‌ها</a><a href="#collections">کالکشن‌ها</a><a href="#best">پرفروش‌ها</a><a href="#about">درباره ما</a></nav><div className="header-actions"><Search size={18} /><UserRound size={18} /><Heart size={18} /><ShoppingBag size={18} /><span className="cart-count">۲</span></div></header>
+    <SearchOverlay products={products} />
+    <header className="site-header"><button className="mobile-menu" onClick={() => setMenuOpen(true)} aria-label="باز کردن منو"><Menu size={20} /></button><div className="logo">DBY</div><nav><a href="#categories">دسته‌بندی‌ها</a><a href="#new">تازه‌ها</a><a href="#collections">کالکشن‌ها</a><a href="#best">پرفروش‌ها</a><a href="#about">درباره ما</a></nav><div className="header-actions"><button className="header-icon" onClick={openSearch} aria-label="باز کردن جستجو"><Search size={18} /></button><UserRound size={18} /><Heart size={18} /><ShoppingBag size={18} /><span className="cart-count">۲</span></div></header>
     {menuOpen && <div className="drawer"><button onClick={() => setMenuOpen(false)} aria-label="بستن منو"><X /></button><div className="logo">DBY</div><a href="#categories">دسته‌بندی‌ها</a><a href="#new">تازه‌ها</a><a href="#collections">کالکشن‌ها</a><a href="#best">پرفروش‌ها</a><a href="#about">درباره ما</a></div>}
     <section className="hero"><img src={heroImage} alt="مدل با لباس سفید در کالکشن تابستانی" /><div className="hero-overlay" /><div className="hero-content"><span className="eyebrow light">کالکشن تابستان — ۱۴۰۵</span><h1>کشف<br /><em>مدی جاودانه</em></h1><p>مجموعه‌هایی برای زندگی مدرن و انتخاب‌های ماندگار.</p><div className="hero-buttons"><a className="button primary" href="#new">خرید کالکشن</a><a className="button outline" href="#lookbook">مشاهده لوک‌بوک</a></div></div><div className="scroll">اسکرول <span /></div></section>
     <section className="categories section" id="categories"><div className="container"><div className="heading-row"><SectionHeading eyebrow="مرور کنید" title="خرید بر اساس دسته‌بندی" /><a className="view-all" href="#new">مشاهده همه ←</a></div><div className="category-grid">{categories.map(([name, count, image]) => <a className="category-card" href="#new" key={name}><img src={image} alt={name} /><div><strong>{name}</strong><span>{count}</span></div></a>)}</div></div></section>
