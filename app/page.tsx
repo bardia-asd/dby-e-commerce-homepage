@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import Link from 'next/link'
 import { ArrowLeft, ArrowRight, Heart, Menu, Search, ShoppingBag, UserRound } from 'lucide-react'
 import { SearchOverlay } from '@/components/search-overlay'
 import { MobileNavDrawer } from '@/components/mobile-nav-drawer'
@@ -36,10 +37,13 @@ function SectionHeading({ eyebrow, title, dark = false }: { eyebrow: string; tit
 }
 
 function ProductCard({ product, dark = false }: { product: typeof products[number]; dark?: boolean }) {
+  const productUrl = `/product?product=${encodeURIComponent(product.en.toLowerCase().replaceAll(' ', '-'))}`
   return <article className={`product-card ${dark ? 'dark-card' : ''}`}>
-    <div className="product-image"><img src={product.image} alt={product.name} /><button aria-label={`افزودن ${product.name} به علاقه‌مندی‌ها`} className="heart"><Heart size={16} /></button>{product.tag && <span className="tag">{product.tag}</span>}</div>
-    <div className="product-meta"><div><span className="brand">DBY</span><h3>{product.name}</h3><span className="english">{product.en}</span></div><strong>{product.price}</strong></div>
-    <div className="rating" aria-label="۵ ستاره">★★★★★</div><div className="swatches"><i /><i /><i /><i /></div>
+    <Link className="product-card-link" href={productUrl} aria-label={`مشاهده ${product.name}`}>
+      <div className="product-image"><img src={product.image} alt={product.name} /><span aria-hidden="true" className="heart"><Heart size={16} /></span>{product.tag && <span className="tag">{product.tag}</span>}</div>
+      <div className="product-meta"><div><span className="brand">DBY</span><h3>{product.name}</h3><span className="english">{product.en}</span></div><strong>{product.price}</strong></div>
+      <div className="rating" aria-label="۵ ستاره">★★★★★</div><div className="swatches"><i /><i /><i /><i /></div>
+    </Link>
   </article>
 }
 
