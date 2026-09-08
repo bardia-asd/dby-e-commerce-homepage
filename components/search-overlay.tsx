@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useMemo, useRef } from 'react'
+import Link from 'next/link'
 import { Search, X } from 'lucide-react'
 import { useSearchStore } from '@/lib/search-store'
 
@@ -40,7 +41,7 @@ export function SearchOverlay({ products }: SearchOverlayProps) {
         <button className="search-close" onClick={close} aria-label="بستن جستجو"><X size={24} /></button>
       </div>
       {!query && <div className="search-trending"><span className="search-label">پرکاربردترین جستجوها</span><div className="search-pills">{trending.map((item) => <button key={item} onClick={() => setQuery(item)}>{item}</button>)}</div></div>}
-      <div className="search-featured"><span className="search-label">{query ? 'نتایج جستجو' : 'محصولات ویژه'}</span>{results.length ? <div className="search-product-grid">{results.map((product) => <article className="search-product" key={product.name}><div className="search-product-image"><img src={product.image} alt={product.name} /></div><h3>{product.name}</h3><span>{product.price}</span></article>)}</div> : <p className="search-empty">محصولی با این عبارت پیدا نشد.</p>}</div>
+      <div className="search-featured"><span className="search-label">{query ? 'نتایج جستجو' : 'محصولات ویژه'}</span>{results.length ? <div className="search-product-grid">{results.map((product) => <article className="search-product" key={product.name}><div className="search-product-image"><img src={product.image} alt={product.name} /></div><h3>{product.name}</h3><span>{product.price}</span></article>)}</div> : <p className="search-empty">محصولی با این عبارت پیدا نشد.</p>}<Link className="search-all-results" href={query ? `/products?query=${encodeURIComponent(query)}` : '/products'} onClick={close}>مشاهده همه محصولات <span>←</span></Link></div>
     </section>
   </div>
 }
