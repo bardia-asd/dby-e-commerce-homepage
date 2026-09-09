@@ -4,7 +4,7 @@ import Link from "next/link"
 import { ArrowLeft, Eye, EyeOff } from "lucide-react"
 import { FormEvent, useState } from "react"
 
-export default function SignInPage() {
+export function SignInPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
@@ -53,3 +53,6 @@ export default function SignInPage() {
     </main>
   )
 }
+
+export default SignInPage
+
