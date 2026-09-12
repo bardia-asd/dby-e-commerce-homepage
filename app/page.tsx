@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { ArrowLeft, ArrowRight, Heart, Menu, Search, ShoppingBag, UserRound } from 'lucide-react'
 import { SearchOverlay } from '@/components/search-overlay'
 import { MegaMenu } from '@/components/mega-menu'
-import { MobileNavDrawer } from '@/components/mobile-nav-drawer'
+import { MobileBottomNav } from '@/components/mobile-bottom-nav'
 import { useSearchStore } from '@/lib/search-store'
 import { CartDrawer } from '@/components/cart-drawer'
 import { useCartStore } from '@/lib/cart-store'
@@ -63,7 +63,7 @@ export default function Page() {
   return <main dir="rtl" id="top">
     <SearchOverlay products={products} />
     <CartDrawer />
-    <MobileNavDrawer />
+    <MobileBottomNav />
     <header className="site-header"><button className="mobile-menu" onClick={openMenu} aria-label="باز کردن منو"><Menu size={20} /></button><div className="logo">DBY</div><nav><MegaMenu /><a href="#new">تازه‌ها</a><a href="#collections">کالکشن‌ها</a><a href="#best">پرفروش‌ها</a><a href="#about">درباره ما</a></nav><div className="header-actions"><button className="header-icon" onClick={openSearch} aria-label="باز کردن جستجو"><Search size={18} /></button><Link href="/account" aria-label="حساب کاربری"><UserRound size={18} /></Link><Heart size={18} /><button className="header-icon cart-trigger" onClick={openCart} aria-label="باز کردن سبد خرید"><ShoppingBag size={18} /><span className="cart-count">{cartCount || ''}</span></button></div></header>
     <section className="hero"><img src={heroImage} alt="مدل با لباس سفید در کالکشن تابستانی" /><div className="hero-overlay" /><div className="hero-content"><span className="eyebrow light">کالکشن تابستان — ۱۴۰۵</span><h1>کشف<br /><em>مدی جاودانه</em></h1><p>مجموعه‌هایی برای زندگی مدرن و انتخاب‌های ماندگار.</p><div className="hero-buttons"><a className="button primary" href="#new">خرید کالکشن</a><a className="button outline" href="#lookbook">مشاهده لوک‌بوک</a></div></div><div className="scroll">اسکرول <span /></div></section>
     <section className="categories section" id="categories"><div className="container"><div className="heading-row"><SectionHeading eyebrow="مرور کنید" title="خرید بر اساس دسته‌بندی" /><a className="view-all" href="#new">مشاهده همه ←</a></div><div className="category-grid">{categories.map(([name, count, image]) => <a className="category-card" href="#new" key={name}><img src={image} alt={name} /><div><strong>{name}</strong><span>{count}</span></div></a>)}</div></div></section>
