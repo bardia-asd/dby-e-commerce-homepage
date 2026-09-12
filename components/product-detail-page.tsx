@@ -7,6 +7,7 @@ import { CartDrawer } from '@/components/cart-drawer'
 import { useCartStore } from '@/lib/cart-store'
 import { SiteFooter } from '@/components/site-footer'
 import { MobileBottomNav } from '@/components/mobile-bottom-nav'
+import { MobileHeaderSearch } from '@/components/mobile-header-search'
 
 type Product = { name: string; price: string; old?: string; image: string; tag?: string }
 
@@ -73,7 +74,7 @@ export function ProductDetailPage() {
   ]
   return <main className="product-detail-page" dir="rtl">
     <CartDrawer />
-    <header className="detail-header"><div className="logo">DBY</div><nav><a href="/">مردانه</a><a href="/">زنانه</a><a href="/">تازه‌ها</a><a href="/">کالکشن‌ها</a><a href="/">حراج</a><a href="/">اکسسوری</a></nav><div className="detail-actions"><Search size={18} /><a href="/account" aria-label="حساب کاربری"><UserRound size={18} /></a><Heart size={18} /><button className="detail-cart-trigger" onClick={openCart} aria-label="باز کردن سبد خرید"><ShoppingBag size={18} /></button><Menu className="detail-menu" size={20} /></div></header>
+    <header className="detail-header"><div className="logo">DBY</div><MobileHeaderSearch /><nav><a href="/">مردانه</a><a href="/">زنانه</a><a href="/">تازه‌ها</a><a href="/">کالکشن‌ها</a><a href="/">حراج</a><a href="/">اکسسوری</a></nav><div className="detail-actions"><Search size={18} /><a href="/account" aria-label="حساب کاربری"><UserRound size={18} /></a><Heart size={18} /><button className="detail-cart-trigger" onClick={openCart} aria-label="باز کردن سبد خرید"><ShoppingBag size={18} /></button><Menu className="detail-menu" size={20} /></div></header>
     <div className="detail-shell">
       <div className="detail-breadcrumb"><a href="/">خانه</a><ChevronLeft size={15} /><a href="/">همه محصولات</a><ChevronLeft size={15} /><span>{product.name}</span></div>
       <section className="detail-layout">
