@@ -5,6 +5,7 @@ import { ChevronDown, ChevronLeft, Heart, Minus, Plus, Search, ShoppingBag, Menu
 import { ProductDetailsTabs } from '@/components/product-details-tabs'
 import { CartDrawer } from '@/components/cart-drawer'
 import { useCartStore } from '@/lib/cart-store'
+import { SiteFooter } from '@/components/site-footer'
 
 type Product = { name: string; price: string; old?: string; image: string; tag?: string }
 
@@ -81,6 +82,6 @@ export function ProductDetailPage() {
       <ProductDetailsTabs description="تفسیری مدرن از پالتوی کلاسیک. از پشم مرینو خالص با خطوط تمیز و معماری‌شده دوخته شده و با آستر کامل، فرم آرام و متفکری دارد." specs={{ جنس: 'پشم مرینو ۱۰۰٪', آستر: 'پلی‌استر بازیافتی', برند: 'DBY', 'کشور سازنده': 'ایتالیا', 'نحوه شست‌وشو': 'خشکشویی', وزن: 'حدود ۸۵۰ گرم', 'رنگ‌های موجود': 'مشکی، کرم، سرمه‌ای' }} />
       <section className="reviews-section" aria-labelledby="reviews-title"><div className="reviews-heading"><div><span className="eyebrow">بازخورد مشتریان</span><h2 id="reviews-title">نظر مشتریان درباره این محصول</h2></div><div className="reviews-summary"><strong>۴.۸</strong><span className="rating">★★★★★</span><small>{product.reviews}</small></div></div><div className="review-toolbar"><div className="review-filters">{(['همه', 'مثبت', 'منفی'] as const).map((filter) => <button key={filter} className={reviewFilter === filter ? 'active' : ''} onClick={() => setReviewFilter(filter)}>{filter}</button>)}</div><span>{visibleReviews.length} نظر نمایش داده می‌شود</span></div><div className="reviews-list">{visibleReviews.map((review) => <article className="review-card" key={review.name}><div className="review-card-top"><div><strong>{review.name}</strong>{review.verified && <small>خرید تأییدشده</small>}</div><time>{review.date}</time></div><div className="rating" aria-label={`${review.rating} از ۵ ستاره`}>{'★'.repeat(review.rating)}<span>{'★'.repeat(5 - review.rating)}</span></div><p>{review.text}</p></article>)}</div></section>
   <section className="related-section"><h2>شاید این‌ها را هم بپسندید</h2><div className="related-grid">{related.map(product => <ProductCard key={product.name} product={product} />)}</div></section>
-    </div>
+    </div><SiteFooter />
   </main>
 }
