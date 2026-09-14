@@ -1,6 +1,7 @@
 "use client"
 
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
 export type CartItem = {
   id: string
@@ -26,7 +27,7 @@ type CartState = {
   applyPromo: (code: string) => void
 }
 
-export const useCartStore = create<CartState>((set) => ({
+export const useCartStore = create<CartState>()(persist((set) => ({
   items: [],
   isOpen: false,
   promoCode: '',
@@ -41,4 +42,4 @@ export const useCartStore = create<CartState>((set) => ({
   decrease: (id) => set((state) => ({ items: state.items.flatMap((item) => item.id === id ? (item.quantity > 1 ? [{ ...item, quantity: item.quantity - 1 }] : []) : [item]) })),
   remove: (id) => set((state) => ({ items: state.items.filter((item) => item.id !== id) })),
   applyPromo: (code) => set({ promoCode: code, discountApplied: code.trim().toLowerCase() === 'dby10' }),
-}))
+}), { name: 'dby-cart' }))
