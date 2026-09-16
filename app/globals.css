@@ -94,10 +94,22 @@ a { color:inherit; text-decoration:none; } button,input { font:inherit; } button
 .detail-rating span,.rating { color:#f6ab00; letter-spacing:1px; }
 .detail-rating small { color:#aaa6ae; font-size:12px; }
 .price-row { display:flex; align-items:center; gap:16px; margin-bottom:28px; direction:rtl; }
-.price-row strong { font-size:32px; }
-.price-row del { color:#aaa6ae; font-size:16px; }
+ .price-row strong { font-size:32px; }
+ .price-row strong.offer-price { color:#d84f12; }
+ .price-row del { color:#aaa6ae; font-size:16px; }
+ .product-offer { display:flex; align-items:center; justify-content:space-between; gap:16px; margin:0 0 24px; padding:17px; border:1px solid #f0c6b0; background:#fff4ed; color:#111; }
+ .product-offer > div:first-child { display:flex; flex-direction:column; gap:5px; }
+ .offer-kicker { color:#d84f12; font-size:9px; letter-spacing:1.5px; }
+ .product-offer strong { font-size:15px; }
+ .product-offer small { color:#8d8580; font-size:10px; }
+ .offer-timer { min-width:108px; padding-right:16px; border-right:1px solid #edc8b7; text-align:center; direction:ltr; }
+ .offer-timer span { display:block; color:#d84f12; font:600 20px/1.2 Arial,sans-serif; letter-spacing:1px; }
+ .offer-timer small { display:block; margin-top:4px; color:#9d8174; font-size:9px; direction:rtl; }
+ .product-offer.expired { border-color:#e6e3df; background:#f5f3f0; }
+ .product-offer.expired .offer-kicker { color:#9996a0; }
+
 .price-row b { background:var(--orange); border-radius:999px; color:#fff; padding:6px 11px; font-size:11px; }
-.option-block { margin:24px 0; }
+ .product-offer { align-items:stretch; padding:14px; }.product-offer strong { font-size:13px; }.offer-timer { min-width:94px; padding-right:10px; }.offer-timer span { font-size:17px; } .option-block { margin:24px 0; }
 .option-label { display:flex; justify-content:space-between; align-items:center; font-size:13px; font-weight:700; margin-bottom:12px; }
 .option-label span { color:#aaa6ae; font-weight:400; }
 .option-label a { color:#96929a; text-decoration:underline; font-weight:400; }
