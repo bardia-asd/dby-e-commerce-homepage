@@ -25,6 +25,7 @@ type CartState = {
   decrease: (id: string) => void
   remove: (id: string) => void
   applyPromo: (code: string) => void
+  clearCart: () => void
 }
 
 export const useCartStore = create<CartState>()(persist((set) => ({
@@ -42,4 +43,5 @@ export const useCartStore = create<CartState>()(persist((set) => ({
   decrease: (id) => set((state) => ({ items: state.items.flatMap((item) => item.id === id ? (item.quantity > 1 ? [{ ...item, quantity: item.quantity - 1 }] : []) : [item]) })),
   remove: (id) => set((state) => ({ items: state.items.filter((item) => item.id !== id) })),
   applyPromo: (code) => set({ promoCode: code, discountApplied: code.trim().toLowerCase() === 'dby10' }),
+  clearCart: () => set({ items: [], isOpen: false, promoCode: '', discountApplied: false }),
 }), { name: 'dby-cart' }))
