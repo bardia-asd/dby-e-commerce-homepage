@@ -3,9 +3,11 @@
 import Link from 'next/link'
 import { ChevronDown, Heart, LogOut, MapPin, Package, Settings, UserRound } from 'lucide-react'
 import { useState } from 'react'
+import { createPortal } from 'react-dom'
 
 export function UserDropdown() {
   const [open, setOpen] = useState(false)
+  const [confirmOpen, setConfirmOpen] = useState(false)
 
   return (
     <div className="user-dropdown">
@@ -18,10 +20,11 @@ export function UserDropdown() {
         <Link href="/account" role="menuitem" onClick={() => setOpen(false)}><UserRound size={15} />حساب من</Link>
         <Link href="/account?tab=orders" role="menuitem" onClick={() => setOpen(false)}><Package size={15} />سفارش‌های من</Link>
         <Link href="/account?tab=addresses" role="menuitem" onClick={() => setOpen(false)}><MapPin size={15} />آدرس‌ها</Link>
-        <Link href="/account?tab=wishlist" role="menuitem" onClick={() => setOpen(false)}><Heart size={15} />علاقه‌مندی‌ها</Link>
+        <Link href="/favorites" role="menuitem" onClick={() => setOpen(false)}><Heart size={15} />علاقه‌مندی‌ها</Link>
         <Link href="/account?tab=settings" role="menuitem" onClick={() => setOpen(false)}><Settings size={15} />تنظیمات</Link>
-        <button type="button" role="menuitem" onClick={() => setOpen(false)}><LogOut size={15} />خروج از حساب</button>
+        <button type="button" role="menuitem" onClick={() => { setOpen(false); setConfirmOpen(true) }}><LogOut size={15} />خروج از حساب</button>
       </div>}
+      {confirmOpen && createPortal(<div className="signout-modal-backdrop" role="presentation" onMouseDown={(event) => { if (event.target === event.currentTarget) setConfirmOpen(false) }}><div className="signout-modal" role="dialog" aria-modal="true" aria-labelledby="signout-title"><span className="signout-modal-icon"><LogOut size={20} /></span><h2 id="signout-title">از حساب خود خارج شوید؟</h2><p>برای خروج از حساب کاربری سارا، تأیید کنید.</p><div className="signout-modal-actions"><button type="button" className="signout-cancel" onClick={() => setConfirmOpen(false)}>انصراف</button><button type="button" className="signout-confirm" onClick={() => setConfirmOpen(false)}>خروج از حساب</button></div></div></div>, document.body)}
     </div>
   )
 }

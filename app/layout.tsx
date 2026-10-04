@@ -10,6 +10,8 @@ export const metadata: Metadata = {
   title: 'DBY | مدی جاودانه',
   description: 'کالکشن‌های منتخب DBY برای کمد مدرن.',
   generator: 'v0.app',
+  openGraph: { title: 'DBY | مدی جاودانه', description: 'کالکشن‌های منتخب DBY برای کمد مدرن.', type: 'website', locale: 'fa_IR' },
+  robots: { index: true, follow: true },
 }
 
 export const viewport: Viewport = { colorScheme: 'light', themeColor: '#ffffff' }
